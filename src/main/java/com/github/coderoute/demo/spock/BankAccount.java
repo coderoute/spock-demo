@@ -1,5 +1,7 @@
 package com.github.coderoute.demo.spock;
 
+import java.math.BigDecimal;
+
 public class BankAccount {
 
     private static final String ACTIVE = "active";
@@ -34,4 +36,15 @@ public class BankAccount {
     public void unfreeze() {
         this.state = ACTIVE;
     }
+
+    public void credit(double amount) {
+        if (!this.state.equals(ACTIVE)) {
+            throw new IllegalStateException("Cannot update a non-active account");
+        }
+        if (balance + amount < 0) {
+            throw new IllegalArgumentException("Insufficient balance");
+        }
+        this.balance += amount;
+    }
 }
+
