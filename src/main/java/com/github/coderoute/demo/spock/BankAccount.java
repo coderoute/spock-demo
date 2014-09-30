@@ -9,12 +9,12 @@ public class BankAccount {
 
     private String name;
     private String state;
-    private double balance;
+    private BigDecimal balance;
 
     public BankAccount(String name) {
         this.name = name;
         this.state = ACTIVE;
-        this.balance = 0.0;
+        this.balance = BigDecimal.ZERO;
     }
 
     public String getName() {
@@ -25,7 +25,7 @@ public class BankAccount {
         return state;
     }
 
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
@@ -37,14 +37,16 @@ public class BankAccount {
         this.state = ACTIVE;
     }
 
-    public void credit(double amount) {
+    public void credit(BigDecimal amount) {
         if (!this.state.equals(ACTIVE)) {
             throw new IllegalStateException("Cannot update a non-active account");
         }
-        if (balance + amount < 0) {
+
+        BigDecimal newBalance = balance.add(amount);
+        if (newBalance.doubleValue() < 0) {
             throw new IllegalArgumentException("Insufficient balance");
         }
-        this.balance += amount;
+        this.balance = newBalance;
     }
 }
 
