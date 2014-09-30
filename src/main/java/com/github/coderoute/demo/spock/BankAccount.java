@@ -39,12 +39,12 @@ public class BankAccount {
 
     public void credit(BigDecimal amount) {
         if (!this.state.equals(ACTIVE)) {
-            throw new IllegalStateException("Cannot update a non-active account");
+            throw new TransactionException("Cannot update a non-active account");
         }
 
         BigDecimal newBalance = balance.add(amount);
         if (newBalance.doubleValue() < 0) {
-            throw new IllegalArgumentException("Insufficient balance");
+            throw new TransactionException("Insufficient balance");
         }
         this.balance = newBalance;
     }

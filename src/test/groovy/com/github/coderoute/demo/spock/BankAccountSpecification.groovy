@@ -114,8 +114,8 @@ class BankAccountSpecification extends Specification {
         e.message == expectedMessage
 
         where:
-        initialBalance | initialState | creditAmount | exceptionType            | expectedMessage
-        0.0            | ACTIVE       | -0.01        | IllegalArgumentException | "Insufficient balance"
-        1.11           | FROZEN       | 0.01         | IllegalStateException    | "Cannot update a non-active account"
+        initialBalance | initialState | creditAmount | exceptionType           | expectedMessage
+        0.0            | ACTIVE       | -0.01        | TransactionException    | "Insufficient balance"
+        1.11           | FROZEN       | 0.01         | TransactionException    | "Cannot update a non-active account"
     }
 }
