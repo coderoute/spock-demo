@@ -10,7 +10,7 @@ BankAccountSpecification
 
 Demonstrates use of Fixture methods, parameterized tests, and assertions.
 
-BankServiceSpecification
+BankingServiceSpecification
 ------------------------
 
 Demonstrates interaction-based testing with use of mocks and stubs.

@@ -3,7 +3,7 @@ package com.github.coderoute.demo.spock
 import spock.lang.Specification
 
 
-class BankServiceSpecification extends Specification {
+class BankingServiceSpecification extends Specification {
 
     def TEST_ACCOUNT_ID = "test-account-id"
     def SUCCESS_TRANSACTION_ID = "success-transaction-id"
