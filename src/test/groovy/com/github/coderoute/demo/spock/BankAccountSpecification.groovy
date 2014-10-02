@@ -3,7 +3,6 @@ package com.github.coderoute.demo.spock
 import spock.lang.Specification
 import spock.lang.Unroll
 
-//@groovy.transform.TypeChecked
 class BankAccountSpecification extends Specification {
 
     public static final String ACTIVE = "active"
@@ -56,6 +55,7 @@ class BankAccountSpecification extends Specification {
         underTest.state == FROZEN
 
         where:
+
         // the left shift operator << is also called a data pipe
         initialState << [ACTIVE, FROZEN]
         // a data table must have at least two columns, above can also be written as
@@ -69,26 +69,10 @@ class BankAccountSpecification extends Specification {
         underTest.balance = initialBalance
         underTest.credit(creditAmount)
 
+        // It is recommeded that Expect be used only when method under test has no side effects
+        // i.e., this example is demonstrating case where it should not be used as credit method
+        //        is mutating the underTest object.
         expect:
-        underTest.balance == expectedBalance
-
-        where:
-        initialBalance | creditAmount | expectedBalance
-        0.0            | 0.0          | 0.0
-        0.01           | -0.01        | 0.0
-        1.11           | 0.01         | 1.12
-        1.01           | -0.02        | 0.99
-    }
-
-    @Unroll("Add credit #creditAmount when initial balance=#initialBalance")
-    def "Adding credit success with mock interaction"() {
-        setup:
-        underTest.balance = initialBalance
-
-        when:
-        underTest.credit(creditAmount)
-
-        then:
         underTest.balance == expectedBalance
 
         where:
